@@ -23,7 +23,10 @@
         <flux:heading class="mb-4">{{ __('Occupied channels') }}</flux:heading>
 
         @if ($channels === [])
-            <flux:text>{{ __('No occupied channels right now.') }}</flux:text>
+            <div class="rounded-xl border border-dashed border-zinc-300 px-6 py-10 text-center dark:border-zinc-700">
+                <p class="font-medium">{{ __('No live subscribers yet') }}</p>
+                <p class="mt-1 text-sm text-zinc-500">{{ __('When clients connect, occupied channels will appear here.') }}</p>
+            </div>
         @else
             <flux:table>
                 <flux:table.columns>

@@ -42,8 +42,10 @@ class AppServiceProvider extends ServiceProvider
 
     protected function configurePulse(): void
     {
-        Gate::define('viewPulse', function (?Authenticatable $user): bool {
-            return $user !== null;
+        $this->app->booted(function (): void {
+            Gate::define('viewPulse', function (?Authenticatable $user): bool {
+                return $user !== null;
+            });
         });
     }
 

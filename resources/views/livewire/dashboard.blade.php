@@ -1,39 +1,51 @@
-<div class="flex w-full flex-col gap-6">
-    <div class="flex items-end justify-between gap-4">
-        <div>
-            <flux:heading size="xl">{{ __('Reverb Hub') }}</flux:heading>
-            <flux:text class="mt-1">{{ __('Manage broadcast credentials and watch live channels.') }}</flux:text>
+<div class="flex w-full flex-col gap-8">
+    <div class="overflow-hidden rounded-3xl border border-zinc-200 bg-linear-to-br from-slate-950 via-slate-900 to-cyan-950 p-6 text-white dark:border-zinc-700 md:p-8">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+                <p class="text-xs font-medium uppercase tracking-[0.2em] text-cyan-300">{{ __('Overview') }}</p>
+                <h1 class="mt-2 text-3xl font-semibold tracking-tight">{{ __('Reverb Hub') }}</h1>
+                <p class="mt-2 max-w-xl text-sm text-slate-300">{{ __('Manage broadcast credentials and watch live channels.') }}</p>
+            </div>
+            <span class="rounded-full px-3 py-1 text-sm font-medium {{ $reverbOnline ? 'bg-emerald-400/15 text-emerald-300' : 'bg-rose-400/15 text-rose-300' }}">
+                {{ $reverbOnline ? __('Reverb online') : __('Reverb unreachable') }}
+            </span>
         </div>
-        <flux:badge :color="$reverbOnline ? 'green' : 'red'" size="sm">
-            {{ $reverbOnline ? __('Reverb online') : __('Reverb unreachable') }}
-        </flux:badge>
     </div>
 
     <div class="grid gap-4 md:grid-cols-3">
-        <flux:card>
-            <flux:heading size="lg">{{ $applications->count() }}</flux:heading>
-            <flux:text>{{ __('Applications') }}</flux:text>
-        </flux:card>
-        <flux:card>
-            <flux:heading size="lg">{{ $applications->where('enabled', true)->count() }}</flux:heading>
-            <flux:text>{{ __('Enabled') }}</flux:text>
-        </flux:card>
-        <flux:card>
-            <flux:heading size="lg">{{ $applications->where('enabled', false)->count() }}</flux:heading>
-            <flux:text>{{ __('Disabled') }}</flux:text>
-        </flux:card>
+        <div class="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-900">
+            <p class="text-sm text-zinc-500">{{ __('Applications') }}</p>
+            <p class="mt-2 text-3xl font-semibold">{{ $applications->count() }}</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-900">
+            <p class="text-sm text-zinc-500">{{ __('Enabled') }}</p>
+            <p class="mt-2 text-3xl font-semibold text-emerald-500">{{ $applications->where('enabled', true)->count() }}</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-900">
+            <p class="text-sm text-zinc-500">{{ __('Disabled') }}</p>
+            <p class="mt-2 text-3xl font-semibold">{{ $applications->where('enabled', false)->count() }}</p>
+        </div>
     </div>
 
-    <flux:card>
-        <div class="mb-4 flex items-center justify-between">
-            <flux:heading>{{ __('Recent applications') }}</flux:heading>
+    <div class="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-700 dark:bg-zinc-900">
+        <div class="mb-5 flex items-center justify-between gap-3">
+            <div>
+                <h2 class="text-lg font-semibold">{{ __('Recent applications') }}</h2>
+                <p class="text-sm text-zinc-500">{{ __('Issue isolated Reverb credentials for each client project.') }}</p>
+            </div>
             <flux:button :href="route('applications.index')" wire:navigate size="sm" variant="primary">
                 {{ __('Manage apps') }}
             </flux:button>
         </div>
 
         @if ($applications->isEmpty())
-            <flux:text>{{ __('No applications yet. Create one to issue App ID, Key, and Secret.') }}</flux:text>
+            <div class="rounded-xl border border-dashed border-zinc-300 px-6 py-12 text-center dark:border-zinc-700">
+                <p class="font-medium">{{ __('Get started with your first application') }}</p>
+                <p class="mt-1 text-sm text-zinc-500">{{ __('No applications yet. Create one to issue App ID, Key, and Secret.') }}</p>
+                <flux:button class="mt-4" :href="route('applications.index')" wire:navigate variant="primary">
+                    {{ __('Create an app') }}
+                </flux:button>
+            </div>
         @else
             <flux:table>
                 <flux:table.columns>
@@ -60,5 +72,5 @@
                 </flux:table.rows>
             </flux:table>
         @endif
-    </flux:card>
+    </div>
 </div>

@@ -7,6 +7,7 @@ RUN apt-get update \
         libicu-dev \
         libzip-dev \
         libpng-dev \
+        procps \
         $PHPIZE_DEPS \
     && docker-php-ext-install -j$(nproc) pdo_mysql pcntl sockets zip intl opcache \
     && pecl install redis \

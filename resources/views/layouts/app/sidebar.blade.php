@@ -26,6 +26,10 @@
 
             <flux:spacer />
 
+            <div class="px-2 pb-3">
+                <x-locale-switcher class="w-full justify-center border-zinc-700 bg-zinc-950/40" />
+            </div>
+
             <flux:sidebar.nav>
                 <flux:sidebar.item icon="folder-git-2" href="https://github.com/chang180/reverb-hub" target="_blank">
                     {{ __('Repository') }}

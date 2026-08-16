@@ -32,7 +32,10 @@
 
     <flux:card>
         @if ($applications->isEmpty())
-            <flux:text>{{ __('No applications yet.') }}</flux:text>
+            <div class="rounded-xl border border-dashed border-zinc-300 px-6 py-10 text-center dark:border-zinc-700">
+                <p class="font-medium">{{ __('Get started with your first application') }}</p>
+                <p class="mt-1 text-sm text-zinc-500">{{ __('No applications yet.') }}</p>
+            </div>
         @else
             <flux:table>
                 <flux:table.columns>

@@ -17,5 +17,7 @@ class PasswordConfirmationTest extends TestCase
         $response = $this->actingAs($user)->get(route('password.confirm'));
 
         $response->assertOk();
+        $response->assertSee('Confirm password');
+        $response->assertDontSee('Log in to your account');
     }
 }

@@ -2,11 +2,8 @@
 	encode gzip zstd
 	root * /var/www/html/public
 
-	handle /app* {
-		reverse_proxy reverb:8080
-	}
-
-	handle /apps* {
+	@reverb path /app /app/* /apps /apps/*
+	handle @reverb {
 		reverse_proxy reverb:8080
 	}
 
