@@ -1,0 +1,19 @@
+{$CADDY_SITE:http://localhost} {
+	encode gzip zstd
+	root * /var/www/html/public
+
+	handle /app* {
+		reverse_proxy reverb:8080
+	}
+
+	handle /apps* {
+		reverse_proxy reverb:8080
+	}
+
+	handle {
+		php_fastcgi app:9000 {
+			root /var/www/html/public
+		}
+		file_server
+	}
+}
