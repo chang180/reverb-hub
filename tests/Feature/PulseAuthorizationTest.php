@@ -1,0 +1,23 @@
+<?php
+
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+
+test('guests cannot view the pulse dashboard', function () {
+    $this->get('/pulse')->assertRedirect(route('login'));
+});
+
+test('authenticated users can view the pulse dashboard', function () {
+    $this->actingAs(User::factory()->create())
+        ->get('/pulse')
+        ->assertOk();
+});
+
+test('the viewPulse gate only allows authenticated users', function () {
+    expect(Gate::has('viewPulse'))->toBeTrue()
+        ->and(Gate::allows('viewPulse'))->toBeFalse();
+
+    $this->actingAs(User::factory()->create());
+
+    expect(Gate::allows('viewPulse'))->toBeTrue();
+});

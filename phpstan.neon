@@ -11,3 +11,8 @@ parameters:
         - routes/
 
     level: 7
+
+    ignoreErrors:
+        -
+            identifier: match.unhandled
+            path: database/migrations/2023_06_07_000001_create_pulse_tables.php
