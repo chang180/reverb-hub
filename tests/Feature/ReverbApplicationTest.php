@@ -18,7 +18,7 @@ class ReverbApplicationTest extends TestCase
 
     public function test_guests_cannot_view_applications(): void
     {
-        $this->get(route('applications.index'))->assertRedirect(route('login'));
+        $this->get(route('applications.index'))->assertNotFound();
     }
 
     public function test_authenticated_users_can_create_an_application(): void

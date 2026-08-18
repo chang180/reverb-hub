@@ -86,7 +86,7 @@ return [
     |
     */
 
-    'prefix' => '',
+    'prefix' => env('FORTIFY_PREFIX', ''),
 
     'domain' => null,
 
@@ -161,7 +161,7 @@ return [
     */
 
     'features' => [
-        Features::registration(),
+        // Single-admin app: public self-registration is disabled on purpose.
         Features::resetPasswords(),
         Features::emailVerification(),
         Features::twoFactorAuthentication([

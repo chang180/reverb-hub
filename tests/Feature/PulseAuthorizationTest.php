@@ -4,7 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 test('guests cannot view the pulse dashboard', function () {
-    $this->get('/pulse')->assertRedirect(route('login'));
+    $this->get('/pulse')->assertNotFound();
 });
 
 test('authenticated users can view the pulse dashboard', function () {

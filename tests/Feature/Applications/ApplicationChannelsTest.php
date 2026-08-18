@@ -10,7 +10,7 @@ test('guests cannot view an application channel page', function () {
     $application = ReverbApplication::factory()->create();
 
     $this->get(route('applications.show', $application))
-        ->assertRedirect(route('login'));
+        ->assertNotFound();
 });
 
 test('inspecting a channel lists presence users from the reverb api', function () {

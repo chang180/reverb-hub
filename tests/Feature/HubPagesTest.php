@@ -2,12 +2,12 @@
 
 use App\Models\User;
 
-test('the home page shows hub branding and auth links', function () {
+test('the home page shows hub branding without exposing the login route', function () {
     $this->get(route('home'))
         ->assertOk()
         ->assertSee(config('app.name'))
-        ->assertSee('Log in')
-        ->assertSee('Sign up');
+        ->assertDontSee('Log in')
+        ->assertDontSee('Sign up');
 });
 
 test('authenticated visitors see a dashboard link on the home page', function () {

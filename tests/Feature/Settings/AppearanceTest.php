@@ -4,7 +4,7 @@ use App\Models\User;
 
 test('guests cannot view appearance settings', function () {
     $this->get(route('appearance.edit'))
-        ->assertRedirect(route('login'));
+        ->assertNotFound();
 });
 
 test('authenticated users can view appearance settings', function () {

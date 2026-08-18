@@ -17,13 +17,6 @@
                     <a href="{{ route('dashboard') }}" class="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-950 hover:bg-cyan-300" wire:navigate>
                         {{ __('Dashboard') }}
                     </a>
-                @else
-                    <a href="{{ route('login') }}" class="hidden rounded-full px-4 py-2 text-sm text-slate-300 hover:text-white sm:inline-flex" wire:navigate>
-                        {{ __('Log in') }}
-                    </a>
-                    <a href="{{ route('register') }}" class="rounded-full bg-cyan-400 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-cyan-300" wire:navigate>
-                        {{ __('Sign up') }}
-                    </a>
                 @endauth
             </div>
         </header>
@@ -37,20 +30,13 @@
                 <p class="max-w-2xl text-lg leading-relaxed text-slate-300">
                     {{ __('One Reverb host. Many applications. Credentials, channels, and occupancy in one place — without running WebSockets on shared hosting.') }}
                 </p>
-                <div class="flex flex-wrap gap-3 pt-2">
-                    @auth
+                @auth
+                    <div class="flex flex-wrap gap-3 pt-2">
                         <a href="{{ route('dashboard') }}" class="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-cyan-300" wire:navigate>
                             {{ __('Open the console') }}
                         </a>
-                    @else
-                        <a href="{{ route('login') }}" class="rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-cyan-300" wire:navigate>
-                            {{ __('Open the console') }}
-                        </a>
-                        <a href="{{ route('register') }}" class="rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-white hover:border-cyan-300/60" wire:navigate>
-                            {{ __('Create a hub account') }}
-                        </a>
-                    @endauth
-                </div>
+                    </div>
+                @endauth
             </div>
 
             <section class="mt-20 grid gap-4 md:grid-cols-3">
