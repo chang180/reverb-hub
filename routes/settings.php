@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Settings\ApiKeys;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Security;
@@ -19,6 +20,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'password.confirm',
         ])
         ->name('security.edit');
+
+    Route::livewire('settings/api-keys', ApiKeys::class)
+        ->middleware([
+            'password.confirm',
+        ])
+        ->name('api-keys.edit');
 });
 
 Route::get('.well-known/passkey-endpoints', function () {

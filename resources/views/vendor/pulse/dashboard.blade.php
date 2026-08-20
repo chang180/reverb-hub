@@ -1,4 +1,5 @@
-<x-pulse>
+{{-- Use x-hub-pulse, not x-pulse: Pulse package owns the pulse:: component namespace. --}}
+<x-hub-pulse>
     <livewire:reverb.connections cols="full" />
 
     <livewire:reverb.messages cols="full" />
@@ -20,4 +21,4 @@
     <livewire:pulse.slow-jobs cols="6" />
 
     <livewire:pulse.slow-outgoing-requests cols="6" />
-</x-pulse>
+</x-hub-pulse>

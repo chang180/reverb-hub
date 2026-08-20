@@ -91,3 +91,15 @@ docker compose restart reverb
 80 / 443 需對公網開放。Caddy 把 `/app`、`/apps` 轉到 Reverb，其餘進管理頁。
 
 客戶端對接見 [docs/client-setup.md](docs/client-setup.md)。
+
+## AI 建立 Reverb 應用（Hub API）
+
+給 AI 的 prompt 只需 Hub 網址與 API key（在 Settings → API Keys 建立）。AI 應先呼叫 `GET /api?docs=1` 取得 machine-readable schema，再依 docs 建立應用：
+
+```
+Reverb Hub: https://hub.example.com
+API key: rh_xxxxxxxx
+
+請先呼叫 Hub API 取得文件，再依我的專案網域建立 Reverb 應用。
+專案網域：https://my-shop.test
+```

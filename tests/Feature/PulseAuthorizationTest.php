@@ -18,7 +18,9 @@ test('the pulse dashboard links back to the main dashboard', function () {
         ->get('/pulse')
         ->assertOk()
         ->assertSee(route('dashboard', absolute: false), escape: false)
-        ->assertSee(__('Dashboard'));
+        ->assertSee(__('Dashboard'))
+        // Unique to resources/views/components/hub-pulse.blade.php (not the package x-pulse layout).
+        ->assertSee('gap-4 sm:gap-6', escape: false);
 });
 
 test('the viewPulse gate only allows authenticated users', function () {
