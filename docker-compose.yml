@@ -10,6 +10,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+      composer:
+        condition: service_completed_successfully
       node:
         condition: service_completed_successfully
     command: php-fpm
@@ -52,7 +54,7 @@ services:
     image: caddy:2-alpine
     restart: unless-stopped
     ports:
-      - "${HTTP_PORT:-80}:80"
+      - "${HTTP_BIND:-0.0.0.0}:${HTTP_PORT:-80}:80"
     environment:
       CADDY_SITE: ${CADDY_SITE:-http://localhost}
     volumes:
@@ -86,11 +88,23 @@ services:
         limits:
           memory: 256M
 
+  composer:
+    build: .
+    env_file: .env
+    volumes:
+      - .:/var/www/html
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader
+
   node:
     image: node:22-alpine
     working_dir: /app
     volumes:
       - .:/app
+    depends_on:
+      composer:
+        condition: service_completed_successfully
     command: sh -c "if [ ! -f public/build/manifest.json ]; then npm ci && npm run build; fi"
 
 volumes:

@@ -1,3 +1,5 @@
+# Site address port is Caddy's listen port inside the container (mapped host HTTP_PORT -> 80).
+# Do not put the host-mapped port (e.g. 9080) here or that host will hit an empty :80 server.
 {$CADDY_SITE:http://localhost} {
 	encode gzip zstd
 	root * /var/www/html/public

@@ -1,0 +1,6 @@
+name: reverb-hub-orb
+
+services:
+  caddy:
+    labels:
+      - dev.orbstack.http-port=80

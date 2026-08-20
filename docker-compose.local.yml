@@ -1,0 +1,32 @@
+# Local Docker only (WSL / macOS OrbStack). Do not use on VPS.
+# VPS uses the host Redis daemon: REDIS_HOST=host.docker.internal
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  reverb:
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  pulse:
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  redis_data:
