@@ -51,8 +51,8 @@ test('comma separated origins are stored as a list', function () {
     $application = ReverbApplication::query()->first();
 
     expect($application->allowed_origins)->toBe([
-        'https://a.test',
-        'https://b.test',
+        'a.test',
+        'b.test',
     ]);
 });
 
