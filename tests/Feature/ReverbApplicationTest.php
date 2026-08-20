@@ -37,7 +37,7 @@ class ReverbApplicationTest extends TestCase
 
         $this->assertNotNull($application);
         $this->assertSame('Hostinger Shop', $application->name);
-        $this->assertSame(['https://shop.example.com'], $application->allowed_origins);
+        $this->assertSame(['shop.example.com'], $application->allowed_origins);
         $this->assertTrue($application->enabled);
         $this->assertNotSame('', $application->key);
     }
