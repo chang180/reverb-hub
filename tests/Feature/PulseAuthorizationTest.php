@@ -13,6 +13,14 @@ test('authenticated users can view the pulse dashboard', function () {
         ->assertOk();
 });
 
+test('the pulse dashboard links back to the main dashboard', function () {
+    $this->actingAs(User::factory()->create())
+        ->get('/pulse')
+        ->assertOk()
+        ->assertSee(route('dashboard', absolute: false), escape: false)
+        ->assertSee(__('Dashboard'));
+});
+
 test('the viewPulse gate only allows authenticated users', function () {
     expect(Gate::has('viewPulse'))->toBeTrue()
         ->and(Gate::allows('viewPulse'))->toBeFalse();
