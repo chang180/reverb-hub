@@ -66,7 +66,7 @@ class ApiKeys extends Component
      */
     public function apiKeys(): array
     {
-        return Auth::user()
+        $keys = Auth::user()
             ->hubApiKeys()
             ->latest()
             ->get()
@@ -78,13 +78,15 @@ class ApiKeys extends Component
                     'id' => $apiKey->id,
                     'name' => $apiKey->name,
                     'prefix' => $apiKey->prefix,
-                    'preset' => $preset?->label() ?? __('Custom'),
+                    'preset' => $preset?->label() ?? (string) __('Custom'),
                     'last_used_at' => $apiKey->last_used_at?->diffForHumans(),
                     'created_at' => $apiKey->created_at->diffForHumans(),
                     'revoked' => $apiKey->isRevoked(),
                 ];
             })
             ->all();
+
+        return array_values($keys);
     }
 
     public function render(): View
